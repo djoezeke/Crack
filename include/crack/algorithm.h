@@ -1,0 +1,4 @@
+#ifndef CRACK_ALGORITHM_H
+#define CRACK_ALGORITHM_H
+
+#endif // CRACK_ALGORITHM_H
