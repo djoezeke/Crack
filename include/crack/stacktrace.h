@@ -1,0 +1,4 @@
+#ifndef CRACK_STACKTRACE_H
+#define CRACK_STACKTRACE_H
+
+#endif // CRACK_STACKTRACE_H

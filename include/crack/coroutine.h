@@ -1,0 +1,4 @@
+#ifndef CRACK_COROUTINE_H
+#define CRACK_COROUTINE_H
+
+#endif // CRACK_COROUTINE_H
