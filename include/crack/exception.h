@@ -1,4 +1,0 @@
-#ifndef CRACK_EXCEPTION_H
-#define CRACK_EXCEPTION_H
-
-#endif // CRACK_EXCEPTION_H
