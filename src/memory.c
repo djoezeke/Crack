@@ -1,3 +1,24 @@
+//////////////////////////////////////////////////////////////////////////////
+/// \file memory.c
+///
+///
+/// SECTIONS: Index of this file
+///
+/// [SECTION] Include Mess
+/// [SECTION] Macro Defines
+///
+/// Internal Declarations
+///
+///     [SECTION] Internal : Forwards
+///     [SECTION] Internal : Structures
+///     [SECTION] Internal : Functions
+///
+/// Public Declarations
+///
+///     [SECTION] Public : Functions
+///
+//////////////////////////////////////////////////////////////////////////////
+
 #include <crack/memory.h>
 #include <stdio.h>
 #include <stdlib.h>

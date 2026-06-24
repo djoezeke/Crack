@@ -1,4 +1,34 @@
+//////////////////////////////////////////////////////////////////////////////
+/// \file <crack/memory.h>
+///
+//////////////////////////////////////////////////////////////////////////////
+
 #ifndef CRACK_MEMORY_H
+
+//////////////////////////////////////////////////////////////////////////////
+///
+/// SECTIONS: Index of this file
+///
+/// [SECTION] Include Mess
+/// [SECTION] Macro Definitions
+///
+/// Internal Declarations
+///
+///     [SECTION] Internal : Macros
+///     [SECTION] Internal : Forwards
+///     [SECTION] Internal : Structures
+///     [SECTION] Internal : Functions
+///
+/// Public Declarations
+///
+///     [SECTION] Public : Forwards
+///     [SECTION] Public : Structures
+///     [SECTION] Public : Functions
+///
+/// [SECTION] Internal Cleanups
+///
+//////////////////////////////////////////////////////////////////////////////
+
 #define CRACK_MEMORY_H
 
 //-----------------------------------------------------------------------------
@@ -10,7 +40,7 @@
 #include <string.h>
 
 //-----------------------------------------------------------------------------
-// [SECTION] Macro Defines
+// [SECTION] Macro Definitions
 //-----------------------------------------------------------------------------
 
 // Smart pointer decorators
