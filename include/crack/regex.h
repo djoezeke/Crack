@@ -12,13 +12,6 @@
 /// [SECTION] Include Mess
 /// [SECTION] Macro Definitions
 ///
-/// Internal Declarations
-///
-///     [SECTION] Internal : Macros
-///     [SECTION] Internal : Forwards
-///     [SECTION] Internal : Structures
-///     [SECTION] Internal : Functions
-///
 /// Public Declarations
 ///
 ///     [SECTION] Public : Forwards
@@ -37,6 +30,7 @@
 
 //////////////////////////////////////////////////////////////////////////////
 /// \defgroup regex Regular Expressions
+/// \ingroup text
 ///
 /// A facility for performing regular expression pattern matching.
 ///
@@ -54,11 +48,14 @@ extern "C"
     // [SECTION] Public : Forwards
     //-----------------------------------------------------------------------------
 
-    typedef int flag;
-
     //-----------------------------------------------------------------------------
     // [SECTION] Public : Structures
     //-----------------------------------------------------------------------------
+
+    typedef enum flag
+    {
+        data,
+    } flag;
 
     //////////////////////////////////////////////////////////////////////////////
     /// \brief A regular expression
@@ -71,7 +68,6 @@ extern "C"
 
     //////////////////////////////////////////////////////////////////////////////
     /// \brief The results of a match or search operation.
-    ///
     //////////////////////////////////////////////////////////////////////////////
     typedef struct match
     {

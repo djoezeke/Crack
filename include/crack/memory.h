@@ -77,6 +77,7 @@ extern "C"
     void crack_shared_release(void *ptr);
 
     // Helper functions for portable initialization and moving
+
     static inline void *crack_init_helper(void *ptr, const void *val, size_t size)
     {
         if (ptr && val)
@@ -86,15 +87,7 @@ extern "C"
         return ptr;
     }
 
-    static inline void *crack_move_helper(void *ptr_ref)
-    {
-        if (!ptr_ref)
-            return NULL;
-        void **real_ref = (void **)ptr_ref;
-        void *temp = *real_ref;
-        *real_ref = NULL;
-        return temp;
-    }
+    static inline void *crack_move_helper(void *ptr_ref);
 
 // Helper macros for make_unique
 #define crack_make_unique_1(type, init) \

@@ -144,7 +144,7 @@ extern "C"
     // [SECTION] Internal : Structures
     //-----------------------------------------------------------------------------
 
-    typedef enum
+    typedef enum format_type_t
     {
         FORMAT_TYPE_BOOL,
         FORMAT_TYPE_CHAR,
@@ -156,7 +156,7 @@ extern "C"
         FORMAT_TYPE_CUSTOM,
     } format_type_t;
 
-    typedef struct
+    typedef struct format_arg_t
     {
         format_type_t type;
         union
@@ -193,7 +193,6 @@ extern "C"
     static inline format_arg_t _fmt_make_double(double val) { return (format_arg_t){.type = FORMAT_TYPE_DOUBLE, .value.double_val = val}; }
     static inline format_arg_t _fmt_make_string(const char *val) { return (format_arg_t){.type = FORMAT_TYPE_STRING, .value.string_val = val}; }
     static inline format_arg_t _fmt_make_pointer(const void *val) { return (format_arg_t){.type = FORMAT_TYPE_POINTER, .value.pointer_val = val}; }
-
     static inline format_arg_t _fmt_make_custom(const char *type_name, const void *ptr)
     {
         format_arg_t arg;
@@ -216,7 +215,6 @@ extern "C"
 //////////////////////////////////////////////////////////////////////////////
 /// \defgroup format Formatting
 /// \ingroup text
-///
 ///
 /// \{
 //////////////////////////////////////////////////////////////////////////////

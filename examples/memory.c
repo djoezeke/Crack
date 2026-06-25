@@ -1,17 +1,10 @@
 #include <crack/memory.h>
+#include <crack/print.h>
 #include <stdio.h>
 
 static void dtor(void *ptr)
 {
-    printf("dtor called on %p\n", ptr);
-}
-
-static int *increment(int count)
-{
-    shared_ptr int *a = make_shared(int, 0);
-    *a = *a + count;
-    printf("c (%p) = %d\n", a, *a);
-    return a;
+    print("dtor called on {}\n", ptr);
 }
 
 int main(void)
@@ -21,16 +14,10 @@ int main(void)
         shared_ptr int *a = make_shared(int, 23);
         shared_ptr int *b = copy_shared(a); // Increments reference count
 
-        printf("a (%p) = %d\n", a, *a);
-        printf("b (%p) = %d\n", b, *b);
+        print("a ({}) = {}\n", a, *a);
+        print("b ({}) = {}\n", b, *b);
 
-        printf("\n");
-
-        int *c = increment(10);
-
-        printf("c (%p) = %d\n", c, *c);
-
-        printf("\n");
+        print("\n");
     } // a and b automatically released here when refcount drops to 0
 
     // Unique Pointer usage
@@ -41,19 +28,46 @@ int main(void)
         // Array support
         unique_ptr int *d = make_unique(int[5], 22, {1, 22, 3, 4, 5});
 
-        printf("a (%p) = %d\n", a, *a);
-        printf("b (%p) = %d\n", b, *b);
+        print("a ({}) = {}\n", a, *a);
+        print("b ({}) = {}\n", b, *b);
 
         printf("\n");
 
-        printf("d (%p) = d : %d\n", d, *d);
+        print("d ({}) = d : {}\n", d, *d);
 
         for (int i = 0; i < 5; i++)
         {
-            printf("d (%p) = d : %d\n", d, *(d + i));
+            print("d ({}) = d : {}\n", d, *(d + i));
         }
 
     } // b's custom destructor and memory automatically cleaned up here
 
     return 0;
 }
+
+//////////////////////////////////////////////////////////////////////////////
+/// LICENSE: Public Domain (www.unlicense.org)
+///
+/// Copyright (c) 2026 Sackey Ezekiel Etrue
+///
+/// This is free and unencumbered software released into the public domain.
+/// Anyone is free to copy, modify, publish, use, compile, sell, or distribute this
+/// software, either in source code form or as a compiled binary, for any purpose,
+/// commercial or non-commercial, and by any means.
+///
+/// In jurisdictions that recognize copyright laws, the author or authors of this
+/// software dedicate any and all copyright interest in the software to the public
+/// domain. We make this dedication for the benefit of the public at large and to
+/// the detriment of our heirs and successors. We intend this dedication to be an
+/// overt act of relinquishment in perpetuity of all present and future rights to
+/// this software under copyright law.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+/// AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+/// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+/// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+///
+/// For more information, please refer to <http://unlicense.org/>
+//////////////////////////////////////////////////////////////////////////////

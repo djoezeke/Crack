@@ -19,14 +19,32 @@
 ///
 //////////////////////////////////////////////////////////////////////////////
 
+//-----------------------------------------------------------------------------
+// [SECTION] Include Mess
+//-----------------------------------------------------------------------------
+
 #include <crack/memory.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+//-----------------------------------------------------------------------------
+// [SECTION] Macro Defines
+//-----------------------------------------------------------------------------
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif // __cplusplus
+
+#pragma region Private
+
+    //-----------------------------------------------------------------------------
+    // [SECTION] Internal : Forwards
+    //-----------------------------------------------------------------------------
+
+    //-----------------------------------------------------------------------------
+    // [SECTION] Internal : Structures
+    //-----------------------------------------------------------------------------
 
     typedef struct
     {
@@ -38,6 +56,18 @@ extern "C"
         size_t ref_count;
         destructor_t destructor;
     } crack_shared_control_t;
+
+    //-----------------------------------------------------------------------------
+    // [SECTION] Internal : Functions
+    //-----------------------------------------------------------------------------
+
+    //////////////////////////////////////////////////////////////////////////////
+    /// Function Declarations
+    //////////////////////////////////////////////////////////////////////////////
+
+    //////////////////////////////////////////////////////////////////////////////
+    /// Function Definations
+    //////////////////////////////////////////////////////////////////////////////
 
     void crack_unique_cleanup(void *ptr)
     {
@@ -94,16 +124,6 @@ extern "C"
         return (void *)(control + 1);
     }
 
-    void *crack_shared_copy(void *ptr)
-    {
-        if (ptr)
-        {
-            crack_shared_control_t *control = (crack_shared_control_t *)ptr - 1;
-            control->ref_count++;
-        }
-        return ptr;
-    }
-
     void crack_shared_release(void *ptr)
     {
         if (!ptr)
@@ -118,6 +138,36 @@ extern "C"
             free(control);
         }
     }
+
+#pragma endregion // Private
+
+#pragma region Public
+
+    //-----------------------------------------------------------------------------
+    // [SECTION] Public : Functions
+    //-----------------------------------------------------------------------------
+
+    void *crack_unique_move(void *ptr_ref)
+    {
+        if (!ptr_ref)
+            return NULL;
+        void **real_ref = (void **)ptr_ref;
+        void *temp = *real_ref;
+        *real_ref = NULL;
+        return temp;
+    }
+
+    void *crack_shared_copy(void *ptr)
+    {
+        if (ptr)
+        {
+            crack_shared_control_t *control = (crack_shared_control_t *)ptr - 1;
+            control->ref_count++;
+        }
+        return ptr;
+    }
+
+#pragma endregion // Public
 
 #ifdef __cplusplus
 } // extern "C"

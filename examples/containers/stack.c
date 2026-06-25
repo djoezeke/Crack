@@ -1,35 +1,55 @@
-#include <crack/format.h>
 #include <crack/print.h>
+#include <crack/stack.h>
 
-typedef struct person
+int main()
 {
-    char *name;
-    int age;
-} person;
+    // 1. Declaration (Uses deque as default underlying container)
+    stack_type(int);
 
-bool person_formatter_t(const void *value, const char *spec, char *out_out, size_t out_size, size_t *out_written)
-{
-    if (!value || out_size == 0)
-        return false;
+    stack(int) st;
+    stack_init(int, &st, 2);
 
-    person *val = (person *)value;
-    *out_written = snprintf(out_out, out_size, "%s %d", val->name, val->age);
+    // 2. push() - Insert elements
+    stack_push(int, &st, 10);
+    stack_push(int, &st, 20);
+    stack_push(int, &st, 30); // 30 is now at the top
 
-    return true;
-};
+    // 3. emplace() - Insert element constructed in-place
+    stack_emplace(int, &st, 40); // 40 becomes the new top
 
-int main(void)
-{
-    person a = {};
-    format_register_custom("person", person_formatter_t);
-    format_arg_t arg = fmt_custom("person", &a);
+    // 4. size() - Check current element count
+    print("Stack size: {} \n", stack_size(int, &st)); // Output: 4
 
-    char *f = format("Hello : {}", "World!");
-    char *f1 = format("Hello : {}", &a);
-    println(f);
-    print(f1, " \n");
+    // 5. top() - Accessing elements without removing them
+    print("Top element: {} \n", stack_top(int, &st)); // Output: 40
 
-    return EXIT_SUCCESS;
+    // 6. pop() - Remove top element
+    // stack_pop(int, &st);
+    // print("New top element after pop: {}\n", stack_top(int, &st)); // Output: 30
+
+    // 7. empty() - Check if stack is empty while clearing it
+    // print("Popping remaining elements: ");
+    // while (!stack_empty(int, &st))
+    // {
+    //     print("{} ", stack_top(int, &st));
+    //     stack_pop(int, &st);
+    // }
+    // print("\n"); // Output: 30 20 10
+
+    // 8. swap() - Exchanging contents of two stacks
+    // stack(int) stackA;
+    // stack(int) stackB;
+
+    // stack_push(int, stackA, 100);
+    // stack_push(int, stackB, 500);
+
+    // stack_swap(int, stackA, stackB);
+    // print("stackA top after swap: {}\n", stack_top(int, stackA)); // Output: 500
+
+    // 9. Custom underlying container definition
+    // stack<int, vector<int>> vectorStack;
+
+    return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////////
